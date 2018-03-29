@@ -37,7 +37,7 @@ public class Approximator {
 		// if the decimal is not on the interval 0, 1 ...
 		if(frac < 0 || frac > 1){
 			// find the greatest integer less than the decimal
-			int lower = (int) frac;
+			int lower = (int) Math.floor(frac);
 			// find the number of digits in front of the decimal point
 			int lowPer = (int) Math.floor(Math.log(lower+1));
 			// Call the function on the fraction - lower and with a precision decreased by the number of digits in front of the decimal point for lower.
