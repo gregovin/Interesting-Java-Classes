@@ -22,6 +22,8 @@ void mousePressed(){
     clickedRow2 = (mouseY-GRID_Y_MIN) / SQUARE_HEIGHT;
     clickedCol2 = (mouseX-GRID_X_MIN) / SQUARE_WIDTH;
     is_chosing = ! is_chosing;
-    b.move(7-clickedRow, 7-clickedCol, 7-clickedRow2, 7-clickedCol2);
+    if(clickedRow != clickedRow2 || clickedCol != clickedCol2){
+      b.move(7-clickedRow, 7-clickedCol, 7-clickedRow2, 7-clickedCol2);
+    }
   }
 }
