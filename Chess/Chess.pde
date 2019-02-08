@@ -5,6 +5,7 @@ final int SQUARE_HEIGHT = 32;
 final int SIDE_OFFSET = 10;
 final int TOP_OFFSET = 10;
 Timer[] times;
+boolean empesa = false;
 int turn = 0;
 public static boolean between(int a, int lower, int upper) {
   return (a >= lower) && (a <= upper);
