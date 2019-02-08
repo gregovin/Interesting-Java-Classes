@@ -2,6 +2,7 @@
 class Piece{
   public int type;
   public int coll;
+  public int turnsSinceLast;
   public int row;
   public int side;
   public int moves_made;
@@ -12,6 +13,7 @@ class Piece{
     this.row = row;
     this.moves_made = 0;
     this.side = side;
+    turnsSinceLast = side -1;
     img = loadImage(imgFilePath);
   }
   public void display(){
@@ -35,5 +37,10 @@ class Piece{
   }
   public boolean inCheck(Board board){
     return false;
+  }
+  public void updateTurns(){
+    if (moves_made != 0){
+      turnsSinceLast ++;
+    }
   }
 }
