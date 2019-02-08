@@ -2,6 +2,9 @@
 public class Board{
   public Piece[][] piecelist;
   public Piece pieceAt(int row, int coll){
+    if(!inBoard(row, coll)){
+      return null;
+    }
     return piecelist[row][coll];
   }
   public Piece[] kings(){
@@ -48,6 +51,17 @@ public class Board{
           times[turn].stop();
           turn = 1 - turn;
           times[turn].start();
+          if(empesa){
+            piecelist[currow][newcol] = null;
+            empesa = false;
+          }
+          if(turn == 1){
+            for(Piece[] pl : piecelist){
+              for(Piece p: pl){
+                if(notNull(p)) p.updateTurns();
+              }
+            }
+          }
           return true;
         }
         return false;
