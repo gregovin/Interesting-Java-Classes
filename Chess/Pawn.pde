@@ -4,7 +4,7 @@ class Pawn extends Piece{
   }
   public boolean valid_move(int newRow, int newColl, Board board){
     if(newColl == coll){
-      if(newRow - row == 2 - 4 * side && this.moves_made == 0 && && !notNull(board.pieceAt(row + 1 - 2 * side, newColl)) && !notNull(board.pieceAt(newRow, newColl))){
+      if(newRow - row == 2 - 4 * side && this.moves_made == 0 && !notNull(board.pieceAt(row + 1 - 2 * side, newColl)) && !notNull(board.pieceAt(newRow, newColl))){
         return true;
       }else if(newRow - row == 1 - 2 * side && !notNull(board.pieceAt(newRow, newColl))){
         return true;
@@ -13,8 +13,10 @@ class Pawn extends Piece{
       if(notNull(board.pieceAt(newRow, newColl))){
         return board.pieceAt(newRow,newColl).side == 1 - this.side;
       } else if(notNull(board.pieceAt(row, coll))){
-        Piece test = board.pieceAt(newRow,newColl);
-        return test.type == this.type && test.moves_made == 1 && test.row = 3 + test.side && test.side == 1 - this.side;
+        Piece test = board.pieceAt(row,newColl);
+        empesa = true;
+        return test.type == this.type && test.moves_made == 1 && test.row == 3 + test.side && test.side == 1 - this.side
+        && test.turnsSinceLast==0;
       }
     }
     return false;
