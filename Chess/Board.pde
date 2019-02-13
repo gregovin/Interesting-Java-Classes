@@ -60,7 +60,15 @@ public class Board{
              "Promotes To", "Pieces",
              JOptionPane.INFORMATION_MESSAGE, null,
              possibleValues, possibleValues[0]);
-            piecelist[newrow][newcol] = new Queen(moving.side, "img/" + sides[moving.side] + selectedValue + ".png", newrow, newcol);
+            if(selectedValue.equals("Queen")){
+              piecelist[newrow][newcol] = new Queen(moving.side, "img/" + sides[moving.side] + "Queen.png", newrow, newcol);
+            } else if(selectedValue.equals("Knight")){
+              piecelist[newrow][newcol] = new Knight(moving.side, "img/" + sides[moving.side] + "Knight.png", newrow, newcol);
+            } else if(selectedValue.equals("Bishop")){
+              piecelist[newrow][newcol] = new Bishop(moving.side, "img/" + sides[moving.side] + "Bishop.png", newrow, newcol);
+            } else {
+              piecelist[newrow][newcol] = new Rook(moving.side, "img/" + sides[moving.side] + "Rook.png", newrow, newcol);
+            }
             promotes = false;
           }
           if(turn == 1){
