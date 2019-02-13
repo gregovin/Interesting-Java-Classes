@@ -2,6 +2,9 @@ class Queen extends Piece{
   public Queen(int side, String imgFilePath) {
     super(1, 4, 7 * side, imgFilePath, side);
   }
+  public Queen(int side, String imgFilePath, int row, int coll){
+    super(1, coll, row, imgFilePath, side);
+  }
   public boolean valid_move(int newRow, int newColl, Board board){
     if(newRow == row){
       if(newColl > coll){
