@@ -59,7 +59,11 @@ class Timer{
   }
   public String secs(){
     if(minutes == 0 && seconds < 10){
-      return "0" + Math.round(seconds * 100)/100;
+      if(Math.round(seconds * 100) % 10 == 0){
+        return "0" + Math.round(seconds * 100)/100.0 + "0";
+      }else {
+        return "0" + Math.round(seconds * 100)/100.0;
+      }
     } else if(seconds < 10){
       return "0" + (int) seconds;
     } else {
