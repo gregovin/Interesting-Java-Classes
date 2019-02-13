@@ -2,6 +2,9 @@ class Knight extends Piece{
   public Knight(int side, String imgFilePath, int coll) {
     super(3, coll, 7 * side, imgFilePath, side);
   }
+  public Knight(int side, String imgFilePath, int row, int coll) {
+    super(3, coll, row, imgFilePath, side);
+  }
   public boolean valid_move(int newRow, int newColl, Board board){
     if(Math.abs(newRow-row) == 2 && Math.abs(newColl-coll) ==1){
       if(notNull(board.pieceAt(newRow, newColl))){
