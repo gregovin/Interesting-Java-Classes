@@ -2,6 +2,9 @@ class Bishop extends Piece{
   public Bishop(int side, String imgFilePath, int coll) {
     super(4, coll, 7 * side, imgFilePath, side);
   }
+  public Bishop(int side, String imgFilePath, int row, int coll) {
+    super(4, coll, row, imgFilePath, side);
+  }
   public boolean valid_move(int newRow, int newColl, Board board){
     if(newRow -row == newColl - coll){
       if(newRow > row){
