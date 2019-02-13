@@ -1,4 +1,4 @@
-
+import javax.swing.JOptionPane;
 public class Board{
   public Piece[][] piecelist;
   public Piece pieceAt(int row, int coll){
@@ -54,6 +54,14 @@ public class Board{
           if(empesa){
             piecelist[currow][newcol] = null;
             empesa = false;
+          }
+          if(promotes){
+             Object selectedValue = JOptionPane.showInputDialog(null,
+             "Promotes To", "Pieces",
+             JOptionPane.INFORMATION_MESSAGE, null,
+             possibleValues, possibleValues[0]);
+            piecelist[newrow][newcol] = new Queen(moving.side, "img/" + sides[moving.side] + selectedValue + ".png", newrow, newcol);
+            promotes = false;
           }
           if(turn == 1){
             for(Piece[] pl : piecelist){
