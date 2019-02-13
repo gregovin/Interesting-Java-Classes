@@ -2,10 +2,14 @@ Board b;
 public int gameOver = 0;// 0 is ongoing, 1 is finnished
 final int SQUARE_WIDTH = 32;
 final int SQUARE_HEIGHT = 32;
+int promotesTo = 3;
+String[] sides = {"white", "black"};
 final int SIDE_OFFSET = 10;
 final int TOP_OFFSET = 10;
 Timer[] times;
 boolean empesa = false;
+boolean promotes = false;
+String[] possibleValues = {"Bishop", "Knight", "Rook", "Queen"};
 int turn = 0;
 public static boolean between(int a, int lower, int upper) {
   return (a >= lower) && (a <= upper);
