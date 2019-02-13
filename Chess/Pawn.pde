@@ -8,10 +8,12 @@ class Pawn extends Piece{
       if(newRow - row == 2 - 4 * side && this.moves_made == 0 && !notNull(board.pieceAt(row + 1 - 2 * side, newColl)) && !notNull(board.pieceAt(newRow, newColl))){
         return true;
       }else if(newRow - row == 1 - 2 * side && !notNull(board.pieceAt(newRow, newColl))){
+        if(newRow == 7 - 7 * side) promotes = true;
         return true;
       }
     } else if(Math.abs(newColl - coll) == 1 && newRow - row == 1 - 2 * side){
       if(notNull(board.pieceAt(newRow, newColl))){
+        if(newRow == 7 - 7 * side) promotes = true;
         return board.pieceAt(newRow,newColl).side == 1 - this.side;
       } else if(notNull(board.pieceAt(row, coll))){
         Piece test = board.pieceAt(row,newColl);
