@@ -6,6 +6,7 @@ class Piece{
   public int row;
   public int side;
   public int moves_made;
+  public String imgFilePath;
   public PImage img;
   public Piece(int type, int coll, int row, String imgFilePath, int side) {
     this.type = type;
@@ -14,7 +15,17 @@ class Piece{
     this.moves_made = 0;
     this.side = side;
     turnsSinceLast = side -1;
+    this.imgFilePath= imgFilePath;
     img = loadImage(imgFilePath);
+  }
+  public Piece clone(){
+    return new Piece(this.type, this.coll, this.row, this.imgFilePath, this.side);
+  }
+  public String toString(){
+    return "Piece: " + "(" + this.type + ", " + this.row + ", " + this.coll + ", " + this.side + ")"; 
+  }
+  public boolean equals(Piece p){
+    return this.type == p.type && this.coll == p.coll && this.row == p.row && this.side == p.side;
   }
   public void display(){
     image(img, (7 -coll) * 32 + SIDE_OFFSET, (7-row) * 32 + TOP_OFFSET, SQUARE_WIDTH, SQUARE_HEIGHT);
