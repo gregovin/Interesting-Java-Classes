@@ -5,21 +5,24 @@ class Timer{
   private boolean running;
   private int x;
   private int y;
-  public Timer(int x, int y){
+  private int s;
+  public Timer(int x, int y, int side){
     minutes = 15;
     seconds = 0;
     this.x = x;
     this.y = y;
     inc = 15;
     running = false;
+    s = side;
   }
-  public Timer(int x, int y, int min, int inc){
+  public Timer(int x, int y, int min, int inc, int side){
     minutes = min;
     seconds = 0;
     this.inc = inc;
     running = false;
     this.x = x;
     this.y = y;
+    s = side;
   }
   public void start(){
     running = true;
@@ -48,7 +51,8 @@ class Timer{
           minutes --;
         } else {
           this.stop();
-          gameOver = 1;
+          gameOver = 2 - s;
+          reasonForGO = 2;
         }
       }
       seconds -= unit;
