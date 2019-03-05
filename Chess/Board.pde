@@ -1,92 +1,31 @@
 import javax.swing.JOptionPane;
 public class Board{
-  public Piece[][] piecelist;
+  public Position p;
   public Piece pieceAt(int row, int coll){
-    if(!inBoard(row, coll)){
-      return null;
-    }
-    return piecelist[row][coll];
+    return p.pieceAt(row, coll);
   }
+  public Piece[][] pieceList(){return p.getPiecelist();}
   public Piece[] kings(){
-    Piece[] res = new Piece[2];
-    for(Piece[] pl : piecelist){
-      for(Piece p : pl){
-        if(notNull(p) && p.type == 0){
-          res[p.side] = p;
-        }
-      }
-    }
-    return res;
+    return p.kings();
   }
+  public Position getPos(){return p;}
   public boolean inBoard(int row, int coll){
     return row >= 0 && row <= 7 && coll >= 0 && coll <= 7;
   }
   public void teleport(int currow, int curcol, int newrow, int newcol){
-    Piece moving = piecelist[currow][curcol];
-    if(notNull(moving) && inBoard(newrow, newcol)){
-      moving.teleport(newrow, newcol);
-      piecelist[currow][curcol] = null;
-      piecelist[newrow][newcol] = moving;
-    }
+    p.teleport(currow, curcol, newrow, newcol);
   }
   public boolean move(int currow, int curcol, int newrow, int newcol){
-    Piece moving = piecelist[currow][curcol];
-    if(notNull(moving) && inBoard(newrow, newcol) && moving.side == turn){
-      moving.teleport(newrow, newcol);
-      piecelist[currow][curcol] = null;
-      Piece temp = piecelist[newrow][newcol];
-      piecelist[newrow][newcol] = moving;
-      if(kings()[moving.side].inCheck(this)){
-        moving.teleport(currow, curcol);
-        piecelist[currow][curcol] = moving;
-        piecelist[newrow][newcol] = temp;
-        return false;
-      } else {
-        moving.teleport(currow, curcol);
-        piecelist[currow][curcol] = moving;
-        piecelist[newrow][newcol] = temp;
-        if(moving.move(newrow,newcol, this)){
-          piecelist[newrow][newcol] = moving;
-          piecelist[currow][curcol] = null;
-          times[turn].stop();
-          turn = 1 - turn;
-          times[turn].start();
-          if(empesa){
-            piecelist[currow][newcol] = null;
-            empesa = false;
-          }
-          if(promotes){
-             Object selectedValue = JOptionPane.showInputDialog(null,
-             "Promotes To", "Pieces",
-             JOptionPane.INFORMATION_MESSAGE, null,
-             possibleValues, possibleValues[0]);
-            if(selectedValue.equals("Queen")){
-              piecelist[newrow][newcol] = new Queen(moving.side, "img/" + sides[moving.side] + "Queen.png", newrow, newcol);
-            } else if(selectedValue.equals("Knight")){
-              piecelist[newrow][newcol] = new Knight(moving.side, "img/" + sides[moving.side] + "Knight.png", newrow, newcol);
-            } else if(selectedValue.equals("Bishop")){
-              piecelist[newrow][newcol] = new Bishop(moving.side, "img/" + sides[moving.side] + "Bishop.png", newrow, newcol);
-            } else {
-              piecelist[newrow][newcol] = new Rook(moving.side, "img/" + sides[moving.side] + "Rook.png", newrow, newcol);
-            }
-            promotes = false;
-          }
-          if(turn == 1){
-            for(Piece[] pl : piecelist){
-              for(Piece p: pl){
-                if(notNull(p)) p.updateTurns();
-              }
-            }
-          }
-          return true;
-        }
-        return false;
-      }
+    boolean success = p.move(currow, curcol, newrow, newcol);
+    if(success){ 
+      posLs.add(p.clone());
+      movesSinceIrreversible ++;
+      checkThreeFold();
     }
-    return false;
+    return success;
   }
   public Board(){
-    piecelist = new Piece[8][8];
+    Piece[][] piecelist = new Piece[8][8];
     piecelist[0][0] = new Rook(0, "img/whiteRook.png", 0);
     piecelist[0][7] = new Rook(0, "img/whiteRook.png", 7);
     piecelist[7][0] = new Rook(1, "img/blackRook.png", 0);
@@ -107,5 +46,7 @@ public class Board{
       piecelist[1][i] = new Pawn(0, "img/whitePawn.png", i);
       piecelist[6][i] = new Pawn(1, "img/blackPawn.png", i);
     }
+    p = new Position(piecelist);
+    posLs.add(p);
   }
 }
