@@ -13,9 +13,10 @@ class Rook extends Piece {
           k++;
         }
         if(k == newColl-coll){
-          if(notNull(board.pieceAt(newRow, newColl))){
-            return board.pieceAt(newRow, newColl).side == 1- this.side;
-          }
+          if(notNull(board.pieceAt(newRow, newColl)) && board.pieceAt(newRow, newColl).side == 1 - this.side){
+            movesSinceIrreversible=-1;
+            return true;
+          } else if(notNull(board.pieceAt(newRow, newColl))) return false;
           return true;
         }
       } else if(newColl < coll){
@@ -24,9 +25,10 @@ class Rook extends Piece {
           k--;
         }
         if(k == newColl-coll){
-          if(notNull(board.pieceAt(newRow, newColl))){
-            return board.pieceAt(newRow, newColl).side == 1- this.side;
-          }
+          if(notNull(board.pieceAt(newRow, newColl)) && board.pieceAt(newRow, newColl).side == 1 - this.side){
+            movesSinceIrreversible=-1;
+            return true;
+          } else if(notNull(board.pieceAt(newRow, newColl))) return false;
           return true;
         }
       }
@@ -37,9 +39,10 @@ class Rook extends Piece {
           k++;
         }
         if(k == newRow-row){
-          if(notNull(board.pieceAt(newRow, newColl))){
-            return board.pieceAt(newRow, newColl).side == 1- this.side;
-          }
+          if(notNull(board.pieceAt(newRow, newColl)) && board.pieceAt(newRow, newColl).side == 1 - this.side){
+            movesSinceIrreversible=-1;
+            return true;
+          } else if(notNull(board.pieceAt(newRow, newColl))) return false;
           return true;
         }
       } else if(newRow < row){
@@ -48,9 +51,10 @@ class Rook extends Piece {
           k--;
         }
         if(k == newRow-row){
-          if(notNull(board.pieceAt(newRow, newColl))){
-            return board.pieceAt(newRow, newColl).side == 1- this.side;
-          }
+          if(notNull(board.pieceAt(newRow, newColl)) && board.pieceAt(newRow, newColl).side == 1 - this.side){
+            movesSinceIrreversible=-1;
+            return true;
+          } else if(notNull(board.pieceAt(newRow, newColl))) return false;
           return true;
         }
       }
