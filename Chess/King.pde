@@ -15,15 +15,13 @@ class King extends Piece{
        }
        if(board.move(7 *side, 7, 7 * side, newColl-1)){
          board.teleport(7 * side, newColl-1, 7 * side, 7);
-         times[this.side].unStop();
-         turn = this.side;
+         undoMove();
          if(board.move(this.row, this.coll, 7 * side, newColl-1)){
-           turn = this.side;
-           times[this.side].unStop();
+           undoMove();
             if(board.move(this.row, this.coll, 7 * side, newColl)){
                board.teleport(7 * side, 7, 7 * side, newColl-1);
                println("casle succeded");
-               turn = this.side;
+               undoMove();
                return true;
            }
          }
@@ -42,9 +40,13 @@ class King extends Piece{
          board.teleport(7*side, newColl+1, 7*side, 0);
          times[this.side].unStop();
          turn = this.side;
+         posLs.remove(posLs.size() -1);
+         movesSinceIrreversible --;
          if(board.move(this.row, this.coll, 7*side, 2)){
            turn = this.side;
            times[this.side].unStop();
+           posLs.remove(posLs.size() -1);
+           movesSinceIrreversible --;
            if(board.move(this.row, this.coll, 7*side, newColl)){
              board.teleport(7*side, 0, 7*side, newColl+1);
              turn = this.side;
@@ -57,9 +59,10 @@ class King extends Piece{
        corner.moves_made = 0;
        return false;
      }
-     if(notNull(board.pieceAt(newRow,newColl))){
-       return board.pieceAt(newRow, newColl).side == 1-this.side;
-     }
+     if(notNull(board.pieceAt(newRow, newColl)) && board.pieceAt(newRow, newColl).side == 1 - this.side){
+       movesSinceIrreversible = -1;
+       return true;
+     } else if(notNull(board.pieceAt(newRow, newColl))) return false;
      return true;
   }
   public boolean inCheck(Board board){
