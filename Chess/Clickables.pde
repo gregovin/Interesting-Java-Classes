@@ -25,5 +25,32 @@ void mousePressed(){
     if(clickedRow != clickedRow2 || clickedCol != clickedCol2){
       b.move(7-clickedRow, 7-clickedCol, 7-clickedRow2, 7-clickedCol2);
     }
+  } else if(turn == 0 && between(mouseX, 8 * SQUARE_WIDTH + 2 * SIDE_OFFSET, 11 * SQUARE_WIDTH + 2 * SIDE_OFFSET) && between(mouseY, 3 * SQUARE_HEIGHT + TOP_OFFSET, (7 * SQUARE_HEIGHT)/2 + TOP_OFFSET)){
+    int buttonClicked = (mouseX - 8 * SQUARE_WIDTH - 2 * SIDE_OFFSET)/SQUARE_WIDTH;
+    if(buttonClicked == 2){
+      gameOver = 2;
+      reasonForGO = 1;
+    } else if(buttonClicked == 1){
+      Object selectedValue = JOptionPane.showConfirmDialog(null,
+        "White has offered a draw, do you accept", "Draw", JOptionPane.YES_NO_OPTION);
+      if(selectedValue.equals(0)){
+         gameOver = 3;
+         reasonForGO = 3;
+      }
+    }
+  } else if(turn == 1 && between(mouseX, 8 * SQUARE_WIDTH + 2 * SIDE_OFFSET, 11 * SQUARE_WIDTH + 2 * SIDE_OFFSET) && between(mouseY, TOP_OFFSET + SQUARE_HEIGHT, (3 *SQUARE_HEIGHT)/2 + TOP_OFFSET)){
+    int buttonClicked = (mouseX - 8 * SQUARE_WIDTH - 2 * SIDE_OFFSET)/SQUARE_WIDTH;
+    if(buttonClicked == 2){
+      gameOver = 1;
+      reasonForGO = 1;
+    } else if(buttonClicked == 1){
+      Object selectedValue = JOptionPane.showConfirmDialog(null,
+        "Black has offered a draw, do you accept", "Draw", JOptionPane.YES_NO_OPTION);
+      if(selectedValue.equals(0)){
+         gameOver = 3;
+         reasonForGO = 3;
+      }
+    }
   }
+  
 }
