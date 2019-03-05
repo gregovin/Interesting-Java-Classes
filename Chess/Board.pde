@@ -4,6 +4,9 @@ public class Board{
   public Piece pieceAt(int row, int coll){
     return p.pieceAt(row, coll);
   }
+  public void setPos(Position newPos){
+    p = newPos;
+  }
   public Piece[][] pieceList(){return p.getPiecelist();}
   public Piece[] kings(){
     return p.kings();
@@ -47,6 +50,6 @@ public class Board{
       piecelist[6][i] = new Pawn(1, "img/blackPawn.png", i);
     }
     p = new Position(piecelist);
-    posLs.add(p);
+    posLs.add(p.clone());
   }
 }
