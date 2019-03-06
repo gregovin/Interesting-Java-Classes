@@ -43,7 +43,7 @@ void mousePressed(){
       if(selectedValue.equals(0)){
          b.setPos(posLs.get(posLs.size()-2));
          posLs.remove(posLs.size()-1);
-         
+         turn = 1 - turn;
       }
     }
   } else if(between(mouseX, 8 * SQUARE_WIDTH + 2 * SIDE_OFFSET, 11 * SQUARE_WIDTH + 2 * SIDE_OFFSET) && between(mouseY, TOP_OFFSET + SQUARE_HEIGHT, (3 *SQUARE_HEIGHT)/2 + TOP_OFFSET)){
@@ -64,6 +64,7 @@ void mousePressed(){
       if(selectedValue.equals(0)){
          b.setPos(posLs.get(posLs.size()-2));
          posLs.remove(posLs.size()-1);
+         turn = 1-turn;
       }
     }
   }
