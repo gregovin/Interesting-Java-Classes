@@ -9,28 +9,31 @@ class Piece{
   public String imgFilePath;
   public PImage img;
   public Piece(int type, int coll, int row, String imgFilePath, int side) {
+    this(type, coll, row, imgFilePath, side, 0, side - 1);
+  }
+  public Piece(int type, int coll, int row, String imgFilePath,int side, int movesMade, int turnsSinceLast){
     this.type = type;
     this.coll = coll;
     this.row = row;
-    this.moves_made = 0;
+    this.moves_made = movesMade;
     this.side = side;
-    turnsSinceLast = side -1;
+    this.turnsSinceLast = turnsSinceLast;
     this.imgFilePath= imgFilePath;
     img = loadImage(imgFilePath);
   }
   public Piece clone(){
     if(this instanceof Pawn){
-      return new Pawn(this.side, this.imgFilePath, this.coll, this.row);
+      return new Pawn(side, imgFilePath, coll, row, moves_made, turnsSinceLast);
     } else if(this instanceof Bishop){
-      return new Bishop(this.side, imgFilePath, row, coll);
+      return new Bishop(side, imgFilePath, row, coll, moves_made, turnsSinceLast);
     } else if(this instanceof King){
-      return new King(this.side, imgFilePath, row, coll);
+      return new King(side, imgFilePath, row, coll, moves_made, turnsSinceLast);
     } else if(this instanceof Knight){
-      return new Knight(side, imgFilePath,row,coll);
+      return new Knight(side, imgFilePath, row, coll, moves_made, turnsSinceLast);
     } else if(this instanceof Queen){
-      return new Queen(side, imgFilePath, row, coll);
+      return new Queen(side, imgFilePath, row, coll, moves_made, turnsSinceLast);
     } else if(this instanceof Rook){
-      return new Rook(side, imgFilePath, row, coll);
+      return new Rook(side, imgFilePath, row, coll, moves_made, turnsSinceLast);
     }
     return new Piece(this.type, this.coll, this.row, this.imgFilePath, this.side);
   }
