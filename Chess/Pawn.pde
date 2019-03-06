@@ -6,6 +6,9 @@ class Pawn extends Piece{
   public Pawn(int side, String imgFilePath, int coll, int row){
     super(5, coll, row, imgFilePath, side);
   }
+  public Pawn(int side, String imgFilePath, int coll, int row, int movesMade, int turnsSinceLast){
+    super(5, coll, row, imgFilePath, side, movesMade, turnsSinceLast);
+  }
   public boolean valid_move(int newRow, int newColl, Board board){
     if(newColl == coll){
       if(newRow - row == 2 - 4 * side && this.moves_made == 0 && !notNull(board.pieceAt(row + 1 - 2 * side, newColl)) && !notNull(board.pieceAt(newRow, newColl))){
