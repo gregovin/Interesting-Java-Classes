@@ -2,6 +2,9 @@ class King extends Piece{
   public King(int side, String imgFilePath) {
     super(0 , 3, 7 * side, imgFilePath, side);
   }
+  public King(int side, String imgFilePath, int row, int coll){
+    super(0 , coll, row, imgFilePath, side);
+  }
   public boolean valid_move(int newRow, int newColl, Board board){
     if(Math.abs(newRow - row) > 1 || Math.abs(newColl - coll) > 2){
        return false;
