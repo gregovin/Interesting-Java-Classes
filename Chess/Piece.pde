@@ -19,6 +19,19 @@ class Piece{
     img = loadImage(imgFilePath);
   }
   public Piece clone(){
+    if(this instanceof Pawn){
+      return new Pawn(this.side, this.imgFilePath, this.coll, this.row);
+    } else if(this instanceof Bishop){
+      return new Bishop(this.side, imgFilePath, row, coll);
+    } else if(this instanceof King){
+      return new King(this.side, imgFilePath, row, coll);
+    } else if(this instanceof Knight){
+      return new Knight(side, imgFilePath,row,coll);
+    } else if(this instanceof Queen){
+      return new Queen(side, imgFilePath, row, coll);
+    } else if(this instanceof Rook){
+      return new Rook(side, imgFilePath, row, coll);
+    }
     return new Piece(this.type, this.coll, this.row, this.imgFilePath, this.side);
   }
   public String toString(){
