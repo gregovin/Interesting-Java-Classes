@@ -5,6 +5,9 @@ class King extends Piece{
   public King(int side, String imgFilePath, int row, int coll){
     super(0 , coll, row, imgFilePath, side);
   }
+  public King(int side, String imgFilePath, int row, int coll, int movesMade, int turnsSinceLast){
+    super(0 , coll, row, imgFilePath, side, movesMade, turnsSinceLast);
+  }
   public boolean valid_move(int newRow, int newColl, Board board){
     if(Math.abs(newRow - row) > 1 || Math.abs(newColl - coll) > 2){
        return false;
