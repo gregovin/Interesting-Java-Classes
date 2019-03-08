@@ -78,6 +78,6 @@ class King extends Piece{
   }
   //seeing if we are in check
   public boolean inCheck(Board board){
-    return this.attacking(board)>0;//are we attacked by more than one piece?
+    return this.attacking(board)>0;//are we attacked by atleast one piece?
   }
 }
