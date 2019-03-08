@@ -76,6 +76,114 @@ class Piece{
     return false;
   }
   //a method to tell if a piece is in check(for kings)
+  public int attacking(Board board){
+    int a = 0;
+    //look for pawns checking
+    if(notNull(board.pieceAt(row + 1 - 2 * this.side, this.coll - 1)) &&
+    board.pieceAt(row + 1 - 2 * this.side, this.coll - 1).type == 5 &&
+    board.pieceAt(row + 1 - 2 * this.side, this.coll - 1).side == 1- side){
+      a++;
+    } 
+    if(notNull(board.pieceAt(row + 1 - 2 * this.side, this.coll + 1))
+    && board.pieceAt(row + 1 - 2 * this.side, this.coll + 1).type == 5
+    && board.pieceAt(row + 1 - 2 * this.side, this.coll + 1).side == 1- side){
+      a++;
+    }
+    //look for knights checking
+    for(int x = 1; x < 3; x ++){
+      for(int sig1 = -1; sig1 < 2; sig1 += 2){
+        for(int sig2 = -1; sig2 < 2; sig2 += 2){
+          if(notNull(board.pieceAt(row + x * sig1, coll + (3-x) * sig2)) && 
+          board.pieceAt(row + x * sig1, coll + (3-x) * sig2).type == 3 && 
+          board.pieceAt(row + x * sig1, coll + (3-x) * sig2).side == 1-this.side){
+            a++;
+          }
+        }
+      }
+    }
+    //look for bishops and queens
+    int k = 1;
+    while(!notNull(board.pieceAt(k + row, k+coll)) && board.inBoard(k + row, k + coll)){
+       k++;
+    }
+    if(notNull(board.pieceAt(k + row, k+coll)) &&
+    (board.pieceAt(k + row, k + coll).type == 4 || board.pieceAt(k + row, k + coll).type == 1) &&
+    board.pieceAt(k + row, k + coll).side == 1- this.side){
+      return a++;
+    }
+    k = -1;
+    while(!notNull(board.pieceAt(k + row, k+coll)) && board.inBoard(k + row, k + coll)){
+       k--;
+    }
+    if(notNull(board.pieceAt(k + row, k+coll)) &&
+    (board.pieceAt(k + row, k + coll).type == 4 || board.pieceAt(k + row, k + coll).type == 1) &&
+    board.pieceAt(k + row, k + coll).side == 1- this.side){
+      return a++;
+    }
+    k = 1;
+    while(!notNull(board.pieceAt(k + row, coll - k)) && board.inBoard(row + k, coll - k)){
+       k++;
+    }
+    if(notNull(board.pieceAt(k + row, coll -k)) &&
+    (board.pieceAt(k + row, coll -k).type == 4 || board.pieceAt(k + row, coll - k).type == 1) &&
+    board.pieceAt(k + row,coll-k).side == 1- this.side){
+      a++;
+    }
+    k = -1;
+    while(!notNull(board.pieceAt(k + row, coll - k)) && board.inBoard(row + k, coll - k)){
+       k--;
+    }
+    if(notNull(board.pieceAt(k + row, coll -k)) &&
+    (board.pieceAt(k + row, coll -k).type == 4 || board.pieceAt(k + row, coll - k).type == 1) &&
+    board.pieceAt(k + row,coll-k).side == 1- this.side){
+      a++;
+    }
+    //looking for rooks and queens who are checking
+    k = 1;
+    while(!notNull(board.pieceAt(k + row, coll)) && board.inBoard(k + row, coll)){
+       k++;
+    }
+    if(notNull(board.pieceAt(k + row, coll)) &&
+    (board.pieceAt(k + row, coll).type == 2 || board.pieceAt(k + row, coll).type == 1) &&
+    board.pieceAt(k + row, coll).side == 1- this.side){
+      a++;
+    }
+    k = -1;
+    while(!notNull(board.pieceAt(k + row, coll)) && board.inBoard(k + row, coll)){
+       k--;
+    }
+    if(notNull(board.pieceAt(k + row, coll)) &&
+    (board.pieceAt(k + row, coll).type == 2 || board.pieceAt(k + row, coll).type == 1) &&
+    board.pieceAt(k + row, coll).side == 1- this.side){
+      a++;
+    }
+    k = 1;
+    while(!notNull(board.pieceAt(row, coll + k)) && board.inBoard(row, coll + k)){
+       k++;
+    }
+    if(notNull(board.pieceAt(row, coll + k)) &&
+    (board.pieceAt(row, coll + k).type == 2 || board.pieceAt(row, coll + k).type == 1) &&
+    board.pieceAt(row,coll + k).side == 1- this.side){
+      a++;
+    }
+    k = -1;
+    while(!notNull(board.pieceAt(row, coll + k)) && board.inBoard(row, coll + k)){
+       k--;
+    }
+    if(notNull(board.pieceAt(row, coll + k)) &&
+    (board.pieceAt(row, coll + k).type == 4 || board.pieceAt(row, coll + k).type == 1) &&
+    board.pieceAt(row,coll + k).side == 1- this.side){
+      a++;
+    }
+    for(int x = -1; x <= 1; x++){
+      for(int y = -1; y <=1; y++){
+        if(notNull(board.pieceAt(row + x, coll+ y)) && board.pieceAt(row + x, coll+ y).type == 0 && board.pieceAt(row + x, coll+ y).side == 1- this.side){
+          a++;
+        }
+      }
+    }
+    return a;
+  }
   public boolean inCheck(Board board){
     return false;
   }
